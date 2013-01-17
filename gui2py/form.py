@@ -96,7 +96,8 @@ class FormTagHandler(wx.html.HtmlWinTagHandler):
         # create a new child container (if current was not closed):
         self.cell = self.GetParser().OpenContainer()
         # experimental highlight (to view final layout), sadly BR resets this
-        self.cell.SetBackgroundColour("yellow")
+        self.GetParser().SetActualColor("gray")
+        self.GetParser().GetContainer().InsertCell(wx.html.HtmlColourCell("gray"))
         # Alignment does not work here (BR fault), so it is set in createControl
         ##self.cell.SetAlignVer(wx.html.HTML_ALIGN_TOP)
         self.ParseInner(tag)
