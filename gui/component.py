@@ -666,11 +666,15 @@ class SizerMixin(object):
             # TODO: determine the combination of sides (wx.ALL now)
             border = max(child.margin_left, child.margin_right,
                          child.margin_top, child.margin_bottom)
+            else:
+                border = 0
             if not border:
-                border = child.sizer_border
+                if hasattr(child, 'sizer_border'):
+                    border = child.sizer_border
             flags = wx.ALL
-            if child.sizer_align:
-                flags |= child._sizer_align 
+            if hasattr(child, 'sizer_align'):
+                if child.sizer_align:
+                    flags |= child._sizer_align 
             self._sizer.Add(child.wx_obj, 0, flags, border)
 
 
